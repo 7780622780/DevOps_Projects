@@ -1,0 +1,11 @@
+name: Test Self-Hosted Runner
+
+on:
+  workflow_dispatch:   # only manual trigger
+
+jobs:
+  test:
+    runs-on: [self-hosted]
+    steps:
+      - name: Say hello
+        run: echo "✅ Hello from my self-hosted runner on Windows!"

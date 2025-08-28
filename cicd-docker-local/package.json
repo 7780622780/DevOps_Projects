@@ -1,0 +1,25 @@
+{
+  "name": "cicd-docker-local",
+  "version": "0.1.0",
+  "description": "Simple Express app to demonstrate CI/CD with GitHub Actions, Docker, and local deploy",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest --runInBand"
+  },
+  "keywords": [
+    "devops",
+    "cicd",
+    "docker",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
+  }
+}

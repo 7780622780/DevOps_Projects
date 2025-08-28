@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  prometheus:
+  image: prom/prometheus:latest
+  volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./alert.rules.yml:/etc/prometheus/alert.rules.yml
+  ports:
+    - "9090:9090"
+  depends_on:
+    - alertmanager
+    - blackbox
+    - web
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+      - "--storage.path=/alertmanager"
+    ports:
+      - "9093:9093"
+    networks:
+      - monitor
+
+  blackbox:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox
+    ports:
+      - "9115:9115"
+    networks:
+      - monitor
+
+  web:
+    image: nginx:latest
+    container_name: web
+    ports:
+      - "8080:80"
+    networks:
+      - monitor
+
+  ops:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ops
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./ansible:/app/ansible
+      - ./webhook.py:/app/webhook.py
+    networks:
+      - monitor
+
+networks:
+  monitor:
+    driver: bridge

@@ -1,0 +1,10 @@
+groups:
+  - name: nginx_alerts
+    rules:
+      - alert: NginxDown
+        expr: up{job="blackbox"} == 0
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          description: "Nginx is down and needs restart"

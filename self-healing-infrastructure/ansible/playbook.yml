@@ -1,0 +1,12 @@
+- name: Self-heal the web container
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Ensure 'web' container is running (restart if needed)
+      community.docker.docker_container:
+        name: web              # must match docker-compose container_name
+        image: nginx:latest
+        state: started
+        restart: true

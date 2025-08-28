@@ -1,0 +1,42 @@
+# Ignore Windows system files
+desktop.ini
+Thumbs.db
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore Docker artifacts
+*.pid
+*.log
+*.bak
+*.swp
+.docker/
+.docker-compose/
+
+# Ignore build/output directories
+dist/
+build/
+coverage/
+
+# Ignore Ansible temporary files
+*.retry
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore IDE specific files
+.idea/
+*.iml
+
+# Ignore Python cache (in case you use scripts)
+__pycache__/
+*.pyc
